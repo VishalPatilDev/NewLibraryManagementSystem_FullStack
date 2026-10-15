@@ -82,6 +82,7 @@ const Login = () => {
             </div>
             <div>
                 <span className="mt-2 font-light text-sm flex justify-center">New User? Contact Admin/Librarian to create Account</span>
+                <span>admin@library.com                 Admin@123</span>
             </div>
         </Card>
 
