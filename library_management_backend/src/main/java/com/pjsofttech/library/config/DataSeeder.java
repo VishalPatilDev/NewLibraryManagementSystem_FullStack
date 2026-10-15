@@ -45,10 +45,10 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        if (userRepository.count() > 0) {
-            log.info("DataSeeder: database already has data — skipping.");
-            return;
-        }
+//        if (userRepository.count() > 0) {
+//            log.info("DataSeeder: database already has data — skipping.");
+//            return;
+//        }
 
         log.info("========================================================");
         log.info("  Starting Library Test Data Seeder (Two Academic Years) ");
