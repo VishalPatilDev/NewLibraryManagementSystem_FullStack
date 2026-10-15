@@ -30,11 +30,22 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         return http.csrf(c->c.disable())
                 .authenticationManager(authenticationManager())
-                .authorizeHttpRequests(auth->
-                        auth.requestMatchers("/pjsofttech/library/health",
-                                        "/pjsofttech/library/register",
-                                "/pjsofttech/library/login")
-                        .permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                HttpMethod.OPTIONS, "/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/login",
+                                "/register",
+                                "/health",
+                                "/pjsofttech/library/health",
+                                "/pjsofttech/library/register",
+                                "/pjsofttech/library/login",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**"
+                        ).permitAll()
                                 .requestMatchers("/pjsofttech/library/user/**")
                                 .authenticated()
                                 .requestMatchers(
