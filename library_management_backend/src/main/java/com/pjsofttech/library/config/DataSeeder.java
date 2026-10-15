@@ -45,10 +45,10 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        if (userRepository.count() > 0) {
-            log.info("DataSeeder: database already has data — skipping.");
-            return;
-        }
+//        if (userRepository.count() > 0) {
+//            log.info("DataSeeder: database already has data — skipping.");
+//            return;
+//        }
 
         log.info("========================================================");
         log.info("  Starting Library Test Data Seeder (Two Academic Years) ");
@@ -139,6 +139,13 @@ public class DataSeeder implements CommandLineRunner {
     private AcademicYear saveAcademicYear(String label, LocalDate start, LocalDate end,
                                           boolean active, int maxBorrow, int loanDays,
                                           String finePerDay, String description) {
+        Optional<AcademicYear> existing =
+                academicYearRepository.findByYearLabel(label);
+
+        if (existing.isPresent()) {
+            log.info("Academic year {} already exists; reusing it.", label);
+            return existing.get();
+        }
         return academicYearRepository.save(AcademicYear.builder()
                 .yearLabel(label)
                 .startDate(start).endDate(end)
